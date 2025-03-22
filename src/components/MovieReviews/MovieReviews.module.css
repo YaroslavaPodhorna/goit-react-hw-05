@@ -1,0 +1,40 @@
+.container {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.reviewList {
+  list-style: none;
+  padding: 0;
+}
+
+.reviewItem {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.author {
+  font-weight: bold;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.content {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.noReviews {
+  font-size: 16px;
+  color: #888;
+}

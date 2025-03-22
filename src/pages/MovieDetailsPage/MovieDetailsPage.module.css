@@ -1,0 +1,117 @@
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.poster {
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.details {
+  flex: 1;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.userScore {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.overview,
+.genresTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.text {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.additionalInfo {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 2px solid #ddd;
+}
+
+.additionalInfoTitle {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.infoList {
+  list-style: none;
+  padding: 0;
+}
+
+.infoItem {
+  margin-top: 5px;
+}
+
+.link {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 16px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.goBackButton {
+  margin-bottom: 20px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.goBackButton:hover {
+  background-color: #ddd;
+}
+
+.separator {
+  margin: 20px 0;
+  border: none;
+  height: 2px;
+  background-color: #ddd;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #ddd;
+}
+
+.additionalInfo h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.additionalInfo ul {
+  list-style: none;
+  padding: 0;
+}
+
+.additionalInfo li {
+  margin-bottom: 8px;
+}
+
+.additionalInfo a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 18px;
+}
+
+.additionalInfo a:hover {
+  text-decoration: underline;
+}

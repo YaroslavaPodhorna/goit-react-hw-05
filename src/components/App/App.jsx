@@ -1,84 +1,35 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
-import SearchBar from "../SearchBar/SearchBar";
-import ImageGallery from "../ImageGallery/ImageGallery";
-import Loader from "../Loader/Loader";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
-import ImageModal from "../ImageModal/ImageModal";
+import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+import Navigation from "../Navigation/Navigation";
+const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+const MoviesPage = lazy(() => import("../../pages/MoviesPage/MoviesPage"));
 
-const API_KEY = "iShxM2emJPHjdrzU9HiKqc7umEc94uvGxRyZPA3xkAQ";
-const BASE_URL = "https://api.unsplash.com/search/photos";
+const MovieDetailsPage = lazy(() =>
+  import("../../pages/MovieDetailsPage/MovieDetailsPage")
+);
+const NotFoundPage = lazy(() =>
+  import("../../pages/NotFoundPage/NotFoundPage")
+);
+const MovieCast = lazy(() => import("../../components/MovieCast/MovieCast"));
+const MovieReviews = lazy(() =>
+  import("../../components/MovieReviews/MovieReviews")
+);
 
 export default function App() {
-  const [query, setQuery] = useState("");
-  const [images, setImage] = useState([]);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  function openModal(image) {
-    setSelectedImage(image);
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setSelectedImage(null);
-    setIsOpen(false);
-  }
-
-  useEffect(() => {
-    if (!query) return;
-
-    async function fetchImages() {
-      try {
-        setError(null);
-        setLoading(true);
-        const response = await axios.get(BASE_URL, {
-          params: { query, page, per_page: 12 },
-          headers: { Authorization: `Client-ID ${API_KEY}` },
-        });
-
-        setImage((prev) => [...prev, ...response.data.results]);
-      } catch (err) {
-        setError("Failed to fetch images. Try again.");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchImages();
-  }, [query, page]);
-
-  const handleSearch = (newQuery) => {
-    if (newQuery.trim() === "") {
-      toast.error("Please enter a search query.");
-      return;
-    }
-    setQuery(newQuery);
-    setImage([]);
-    setPage(1);
-  };
-
   return (
     <>
-      <SearchBar onSubmit={handleSearch} />
-      {error && <ErrorMessage message={error} />}
-      <ImageGallery images={images} openModal={openModal} />
-      {loading && <Loader />}
-      {images.length > 0 && (
-        <LoadMoreBtn onClick={() => setPage((prev) => prev + 1)} />
-      )}
-
-      <ImageModal
-        isOpen={isOpen}
-        closeModal={closeModal}
-        image={selectedImage}
-      />
-      <Toaster position="top-right" reverseOrder={false} />
+      <Navigation />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }

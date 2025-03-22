@@ -1,0 +1,31 @@
+.castContainer {
+  padding: 20px;
+}
+
+.castList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.castItem {
+  width: 120px;
+  text-align: center;
+}
+
+.actorImage {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.actorName {
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.actorCharacter {
+  font-size: 14px;
+  color: gray;
+}
