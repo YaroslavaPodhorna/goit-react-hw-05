@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   useNavigate,
   useLocation,
@@ -19,8 +19,10 @@ export default function MovieDetailsPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const backLinkRef = useRef(location.state?.from || "/movies");
+
   const handleGoBack = () => {
-    navigate(location.state?.from || "/movies");
+    navigate(backLinkRef.current);
   };
 
   useEffect(() => {
@@ -79,7 +81,7 @@ export default function MovieDetailsPage() {
           <Link
             className={css.link}
             to="cast"
-            state={{ from: location.state?.from }}
+            state={{ from: backLinkRef.current }}
           >
             Cast
           </Link>
@@ -88,7 +90,7 @@ export default function MovieDetailsPage() {
           <Link
             className={css.link}
             to="reviews"
-            state={{ from: location.state?.from }}
+            state={{ from: backLinkRef.current }}
           >
             Reviews
           </Link>
